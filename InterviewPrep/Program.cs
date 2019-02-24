@@ -7,12 +7,7 @@ namespace InterviewPrep
         static LinkedList list = new LinkedList();
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello Kavya!");
-            list.BuildLinkedList();
-
-            int count = Count(2);
-
-            int value = GetNth(3);
+           // list.BuildLinkedList();
         }
 
         //Write a Count() function that counts the number of times a given int occurs in a list. 
@@ -169,38 +164,6 @@ namespace InterviewPrep
                 list.AddNodeAtBeginning(current.data);
                 current = current.next;
             }
-        }
-
-        //AlternatingSplit - use MoveNode() as a helper
-        public static Node AlternatingSplit()
-        {
-            LinkedList listB = new LinkedList();
-            Node currentListB = listB.head;
-
-            Node currentListA = list.head;
-            Node previous = currentListA;
-            int count = 1;
-
-            while (currentListA != null)
-            {
-                if (count % 2 == 0)
-                {
-                    if (listB.head == null)
-                    {
-                        listB.head = currentListA;
-                        currentListB = listB.head;
-                    }
-                    else
-                    {
-                        currentListB.next = currentListA;
-                    }
-                    previous = currentListA.next;
-                }
-
-                currentListA = currentListA.next;
-            }
-
-            return listB.head;
         }
     }
 }

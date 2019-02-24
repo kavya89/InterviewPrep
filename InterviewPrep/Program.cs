@@ -67,9 +67,140 @@ namespace InterviewPrep
 
         //Write a SortedInsert() function which given a list that is sorted in increasing order, and a 
         //single node, inserts the node into the correct sorted position in the list. 
-        public static void SortedInsert(int value){
-            
+        public static Node SortedInsert(int value , LinkedList list1){
+            Node newNode = new Node(value);
+            Node current = list1.head;
+            Node previous = current;
+
+            if(list1.head == null){
+                list1.AddNodeAtBeginning(value);
+                return list1.head;
+            }
+            if(list1.head.data < value){
+                list1.AddNodeAtBeginning(value);
+                return list.head;
+            }
+
+            while(current != null){
+                if(current.data < value){
+                    previous = current;
+                    current = current.next;
+                }
+            }
+
+            previous.next = newNode;
+            newNode.next = current;
+
+            return list1.head;
         }
 
+        //Write an InsertSort() function which given a list, rearranges its nodes so they are sorted in increasing order.It should use SortedInsert().
+        public static Node InsertSort(LinkedList ListToSort){
+            LinkedList SortedList = new LinkedList();
+            Node current = ListToSort.head;
+            while(current != null){
+                SortedList.head = SortedInsert(current.data, SortedList);
+            }
+
+            return SortedList.head;
+        }
+
+        //Write an Append() function that takes two lists, 'a' and 'b', appends 'b' onto the end of 'a', and then sets 'b' to NULL
+        public static void Append(LinkedList listB){
+            Node currrent = list.head;
+            if(list.head == null){
+                list.head = listB.head;
+                listB.head = null;
+                return;
+            }
+            while(currrent != null){
+                currrent = currrent.next;
+            }
+
+            currrent.next = listB.head;
+            listB.head = null;
+        }
+
+        //Given a list, split it into two sublists — one for the front half, and one for the back half. 
+        public static Node FrontBackSplit(){
+            if(list.head == null){
+                throw new Exception("empty list");
+            }
+
+            int length = list.GetLength()/2;
+            Node current = list.head;
+            int count = 1;
+
+            while(current != null && count < length+1){
+                current = current.next;
+                count++;
+            }
+
+            LinkedList secondHalf = new LinkedList();
+            secondHalf.head = current.next;
+            current.next = null;
+
+            return secondHalf.head;
+
+        }
+
+        //Write a RemoveDuplicates() function which takes a list sorted in increasing order and deletes any duplicate nodes from the list.
+        public static void RemoveDuplicates(){
+            Node current = list.head;
+            Node previous = null;
+
+            while(current != null){
+                previous = current;
+                current = current.next;
+                if(current != null){
+                    if(previous.data == current.data){
+                        previous.next = current.next;
+                        current = current.next;
+                    }
+                }
+            }
+        }
+
+        //MoveNode() takes two lists, removes the front node from the second list and pushes it onto the front of the first. 
+        public static void MoveNode(LinkedList listB){
+            Node current = listB.head;
+
+            while(current != null){
+                list.AddNodeAtBeginning(current.data);
+                current = current.next;
+            }
+        }
+
+        //AlternatingSplit - use MoveNode() as a helper
+        public static Node AlternatingSplit()
+        {
+            LinkedList listB = new LinkedList();
+            Node currentListB = listB.head;
+
+            Node currentListA = list.head;
+            Node previous = currentListA;
+            int count = 1;
+
+            while (currentListA != null)
+            {
+                if (count % 2 == 0)
+                {
+                    if (listB.head == null)
+                    {
+                        listB.head = currentListA;
+                        currentListB = listB.head;
+                    }
+                    else
+                    {
+                        currentListB.next = currentListA;
+                    }
+                    previous = currentListA.next;
+                }
+
+                currentListA = currentListA.next;
+            }
+
+            return listB.head;
+        }
     }
 }

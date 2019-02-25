@@ -18,6 +18,7 @@ namespace InterviewPrep
                 if(current.data == val){
                     count++;
                 }
+                current = current.next;
             }
             return count;
         }
@@ -75,17 +76,14 @@ namespace InterviewPrep
                 list1.AddNodeAtBeginning(value);
                 return list.head;
             }
-
             while(current != null){
                 if(current.data < value){
                     previous = current;
                     current = current.next;
                 }
             }
-
             previous.next = newNode;
             newNode.next = current;
-
             return list1.head;
         }
 
@@ -96,7 +94,6 @@ namespace InterviewPrep
             while(current != null){
                 SortedList.head = SortedInsert(current.data, SortedList);
             }
-
             return SortedList.head;
         }
 
@@ -111,7 +108,6 @@ namespace InterviewPrep
             while(currrent != null){
                 currrent = currrent.next;
             }
-
             currrent.next = listB.head;
             listB.head = null;
         }
@@ -130,13 +126,11 @@ namespace InterviewPrep
                 current = current.next;
                 count++;
             }
-
             LinkedList secondHalf = new LinkedList();
             secondHalf.head = current.next;
             current.next = null;
 
             return secondHalf.head;
-
         }
 
         //Write a RemoveDuplicates() function which takes a list sorted in increasing order and deletes any duplicate nodes from the list.
